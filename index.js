@@ -25,7 +25,7 @@ const mongoSanitize = require('express-mongo-sanitize');
 
 const helmet = require('helmet');
 //mongodb://localhost:27017/yelp-camp
-const dbUrl = process.env.DB_URL | 'mongodb://localhost:27017/yelp-camp';
+const dbUrl = process.env.DB_URL || 'mongodb://localhost:27017/yelp-camp';
 mongoose.connect(dbUrl, {
     useNewUrlParser: true,
     useUnifiedTopology: true,
@@ -53,7 +53,7 @@ store.on('error', function (e) {
     console.log("Session store", e);
 })
 const sessionConfig = {
-    store,
+    store: store,
     name: 'YoY@',//chnaging the name
     secret,
     resave: false,
@@ -119,6 +119,7 @@ app.use((err, req, res, next) => {
     res.status(statusCode).render('error', { err });
 })
 
-app.listen(3000, () => {
-    console.log('SERVING ON PORT 3000');
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+    console.log(`SERVING ON PORT ${port}`);
 })
