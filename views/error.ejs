@@ -7,11 +7,10 @@
                     <%= err.message %> .
                 </p>
                 <hr>
-                <% if(process.env.NODE_ENV!=='production' ){ %>
-                    <p class="mb-0">
-                        <%= err.stack %> .
-                    </p>
-                    <% } %>// hidning error stack for users so that it is not displayed to users
+
+                <p class="mb-0">
+                    <%= err.stack %> .
+                </p>
             </div>
         </div>
     </div>
